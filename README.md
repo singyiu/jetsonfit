@@ -5,20 +5,27 @@ In order to keep my kids doing exercise during the shelter-in-place order, we st
 It is an awesome exercise based game.
 However, after three months and leveling up over 200, the kids started losing interest.
 
-We moved on to play [Mario & Sonic at the Olympic Games Tokyo 2020](https://www.nintendo.com/games/detail/mario-and-sonic-at-the-olympic-games-tokyo-2020-switch/).
-Unfortunately, this game is not exercise based and only some sport events support motion control.
+We moved on to play [Mario & Sonic at the Olympic Games Tokyo 2020](https://www.nintendo.com/games/detail/mario-and-sonic-at-the-olympic-games-tokyo-2020-switch/) and [Yoshi's Crafted World](https://yoshiscraftedworld.nintendo.com/).
+Unfortunately, these games are not exercise based and only some sport events support motion control.
 In particular, my 3 yr old kid's finger is not developed enough to play with the key pad.
 
 So this hack is created, for converting games into motion controllable one for small kids.
 
 # Demo
 
+[![Demo](https://img.youtube.com/vi/P9RO0Vl4jNA/0.jpg)](https://youtu.be/P9RO0Vl4jNA)
+
+- [Yoshi's Crafted World](https://yoshiscraftedworld.nintendo.com/)
+
 [![Demo](https://img.youtube.com/vi/gId1TodtYOY/0.jpg)](https://youtu.be/gId1TodtYOY)
+
+- [Mario & Sonic at the Olympic Games Tokyo 2020](https://www.nintendo.com/games/detail/mario-and-sonic-at-the-olympic-games-tokyo-2020-switch/) - Karate
+
+# Hardware
 
 - [Nvidia Jetson NX](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-xavier-nx/)
 - Logitech C920 at 30fps
 - Nintendo Switch
-- [Mario & Sonic at the Olympic Games Tokyo 2020](https://www.nintendo.com/games/detail/mario-and-sonic-at-the-olympic-games-tokyo-2020-switch/) - Karate
 
 # Design
 

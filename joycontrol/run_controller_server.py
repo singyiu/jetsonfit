@@ -52,13 +52,38 @@ Options:
 
     -l --log <communication_log_file>       Write hid communication (input reports and output reports) to a file.
 """
+async def button_long_push(controller_state, *buttons):
+    if not buttons:
+        raise ValueError('No Buttons were given.')
+    button_state = controller_state.button_state
+    for button in buttons:
+        button_state.set_button(button)
+    await controller_state.send()
+
+async def button_unpush(controller_state, *buttons):
+    if not buttons:
+        raise ValueError('No Buttons were given.')
+    button_state = controller_state.button_state
+    for button in buttons:
+        button_state.set_button(button, pushed=False)
+    await controller_state.send()
+
+async def button_unpush_and_push(controller_state, unPushButtons, pushButtons):
+    if not buttons:
+        raise ValueError('No Buttons were given.')
+    button_state = controller_state.button_state
+    for button in unPushButtons:
+        button_state.set_button(button, pushed=False)
+    for button in pushButtons:
+        button_state.set_button(button)
+    await controller_state.send()
 
 async def handle_tcp_server(reader, writer):
     global g_controller_state
     logging.info(f'client connected')
     t0 = 0
     t1 = 0
-    buttonPushTime = 0.1
+    #buttonDirPushTime = 0.1
     while True:
         data = await reader.read(1)
         t0 = time.time()
@@ -75,16 +100,47 @@ async def handle_tcp_server(reader, writer):
         elif msg == "r":
             await button_push(g_controller_state, 'right')
         elif msg == "a":
-            await button_push(g_controller_state, 'a', sec=buttonPushTime)
-        elif msg == "A":
-            for i in range(0,10):
-                await button_push(g_controller_state, 'a', sec=buttonPushTime)
+            await button_push(g_controller_state, 'a')
         elif msg == "b":
-            await button_push(g_controller_state, 'b', sec=buttonPushTime)
+            await button_push(g_controller_state, 'b')
         elif msg == "x":
             await button_push(g_controller_state, 'x')
         elif msg == "y":
             await button_push(g_controller_state, 'y')
+        elif msg == "e":
+            await button_long_push(g_controller_state, 'a')
+        elif msg == 'E':
+            await button_unpush(g_controller_state, 'a')
+        elif msg == "f":
+            await button_long_push(g_controller_state, 'b')
+        elif msg == 'F':
+            await button_unpush(g_controller_state, 'b')
+        elif msg == "g":
+            await button_long_push(g_controller_state, 'x')
+        elif msg == 'G':
+            await button_unpush(g_controller_state, 'x')
+        elif msg == "h":
+            await button_long_push(g_controller_state, 'y')
+        elif msg == 'H':
+            await button_unpush(g_controller_state, 'y')
+        elif msg == "m":
+            await button_unpush_and_push(g_controller_state, ['down','left','right'], ['up'])
+        elif msg == 'M':
+            await button_unpush(g_controller_state, 'up')
+        elif msg == "n":
+            await button_unpush_and_push(g_controller_state, ['up','left','right'], ['down'])
+        elif msg == 'N':
+            await button_unpush(g_controller_state, 'down')
+        elif msg == "o":
+            await button_unpush_and_push(g_controller_state, ['up','down','right'], ['left'])
+        elif msg == 'O':
+            await button_unpush(g_controller_state, 'left')
+        elif msg == "p":
+            await button_unpush_and_push(g_controller_state, ['up','down','left'], ['right'])
+        elif msg == 'P':
+            await button_unpush(g_controller_state, 'right')
+        elif msg == '0':
+            await button_unpush(g_controller_state, 'up','down','left','right')
         elif msg == "L":
             await button_push(g_controller_state, 'l')
         elif msg == "R":
